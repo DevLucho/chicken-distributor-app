@@ -1,27 +1,20 @@
-// filepath: c:\Users\luisd\Desktop\proyecto\chicken-distributor-app\src\context\AppContext.jsx
 import React, { createContext, useState } from 'react';
 
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // Valor inicial de user es null
-    const [inventory, setInventory] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(null); // Estado del usuario
 
     const login = (userData) => {
-        setUser(userData);
+        setUser(userData); // Establecer usuario al iniciar sesión
     };
 
     const logout = () => {
-        setUser(null);
-    };
-
-    const updateInventory = (newInventory) => {
-        setInventory(newInventory);
+        setUser(null); // Limpiar usuario al cerrar sesión
     };
 
     return (
-        <AppContext.Provider value={{ user, login, logout, inventory, updateInventory, loading, setLoading }}>
+        <AppContext.Provider value={{ user, login, logout }}>
             {children}
         </AppContext.Provider>
     );

@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../context/AppContext';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { login } = useContext(AppContext); // Usar la función login del contexto
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        // Simulate authentication logic
+
+        // Simular lógica de autenticación
         if (username === 'admin' && password === 'password') {
-            console.log('Inicio de sesión exitoso');
+            const userData = { name: 'Admin User', role: 'Administrator' }; // Datos simulados del usuario
+            login(userData); // Actualizar el estado del usuario en el contexto
+            navigate('/dashboard'); // Redirigir al Dashboard
         } else {
             setError('Usuario o contraseña inválidos');
         }
